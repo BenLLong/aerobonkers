@@ -8,6 +8,7 @@ program
     .usage('[options] <file>')
     .option('--no-data', 'Do not randomize plane data')
     .option('--no-names', 'Do not randomize airline names')
+    .option('--no-city', 'Do not randomize city data')
     .option('-o, --output <name>', 'Output file name', 'aerobonkers-output.sfc')
     .parse(process.argv);
  
@@ -37,7 +38,8 @@ fs.readFile(program.args[0], (error, fileBuffer) => {
             flags: {
                 a: program.names,
                 p: program.data,
-                crazy: false,
+                c: program.data,
+                crazy: true,
             }
         },
         hooks: {

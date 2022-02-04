@@ -1,6 +1,7 @@
 import RandomTools from 'randomtools-js';
 import AirlineNameObject from './AirlineNameObject.js';
 import PlaneDataObject from './PlaneDataObject.js';
+import CityDataObject from './CityDataObject.js';
 
 
 export function execute(options) {
@@ -21,6 +22,7 @@ export function execute(options) {
     const readWriteObjects = [
         AirlineNameObject,
         PlaneDataObject,
+        CityDataObject,
     ];
 
     // You can define an afterOrder if one object has a dependency on one or more others.
@@ -31,6 +33,7 @@ export function execute(options) {
     // to make all randomization that uses the normal distribution functions wider.
     if (options.specs.flags.crazy) {
         PlaneDataObject.randomDegree = 0.9;
+        CityDataObject.randomDegree = 0.9;
     }
     
     // You can add patches, defined as a list of indexes with a list of bytes
