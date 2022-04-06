@@ -28,6 +28,8 @@ class PlaneDataObject extends TableObject {
     
     // By default, the row's index is used for rank, which is used to determine which
     // rows are similar to each other. You can override this behavior, as shown here.
+    // seats probably gives a more 'like each other' accuracy, but price gives a bit
+    // more randomness in the normal distribution
     get rank() {
         return this.oldData.price;
     }
@@ -47,30 +49,30 @@ class PlaneDataObject extends TableObject {
 
 // For randomizeAttributes, each row takes a random value from among all rows' old values.
 // No concept of nearby, rank, or normal distribution is used; this is strictly random.
-PlaneDataObject.randomizeAttributes = [
-    "miles_range", "seats", "fuel", "maintenance"
-];
+// PlaneDataObject.randomizeAttributes = [
+//     "miles_range", "seats", "fuel", "maintenance"
+// ];
     
 // For mutateAttributes, each row's values are changed directly by one of several methods. 
 PlaneDataObject.mutateAttributes = {
     // For null, the range of valid values is determined from all of the rows of the table, 
     // and the value is mutated within those bounds. This is the most common 
     // mutateAttribute value and will do the right thing the majority of the time.
-    // "miles_range": null, 
-    // "seats": null,
+    "miles_range": null, 
+    "seats": null,
     "price": null,
 
     // An array of two integers will define bounds the value will be mutated between.
-    // "fuel": [1, 63],   
-    // "maintenance": [1, 63],
+    "fuel": [1, 63],
+    "maintenance": [1, 63],
     
     // A closure can be passed for custom mutation logic.
-    "speed": (o) => {   
-        if(o.context.random.random() < 0.25) { // A quarter of the time, double the speed.
-            return Math.floor(o.data.speed / 2); // Smaller values are faster
-        }
-        return o.data.speed;
-    },
+    // "speed": (o) => {   
+    //     if(o.context.random.random() < 0.25) { // A quarter of the time, double the speed.
+    //         return Math.floor(o.data.speed / 2); // Smaller values are faster
+    //     }
+    //     return o.data.speed;
+    // },
 
     // An example type not used in this randomizer:
     // "drop_item_index": ItemObject,
@@ -86,11 +88,11 @@ PlaneDataObject.tableSpecs = {
         "seller,1",
         "seats,1",
         "miles_range,2", // This value is not the literal miles_range but partially determines it.
-        "price,2",
-        "year,1",
-        "speed,1",
-        "fuel,1",
-        "maintenance,1",
+        "price,2", // when reading the ROM, the bytes are reversed, so e8 03 should be 03e8 when converted to decimial
+        "year,1", // this value plus 1900 is the start year of produciton of the plane
+        "speed,1", // not actually convinced this is speed; the DC6 and L1049 share the same value, but the DC6 is slower in the game
+        "fuel,1", // this value is subtracted from 100 to determine fuel; lower numbers are better fuel economy
+        "maintenance,1", // this value subtracted from 100 is maintenance; lower numbers are cheaper maintenance
         "unknownbitfield,bit:unknown1 unknown2 unknown3 unknown4 unknown5 unknown6 unknown7 unknown8",
         // These values can be loaded from external text files using array-loader instead of written here.
         // First value will be the attribute name in .data and .oldData, second value is byte length.

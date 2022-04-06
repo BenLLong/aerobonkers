@@ -32,8 +32,8 @@ export function execute(options) {
     // You can increase the randomDegree of any class or any individual object
     // to make all randomization that uses the normal distribution functions wider.
     if (options.specs.flags.crazy) {
-        PlaneDataObject.randomDegree = 0.9;
-        CityDataObject.randomDegree = 0.9;
+        PlaneDataObject.randomDegree = 1.35;
+        CityDataObject.randomDegree = 1.35;
     }
     
     // You can add patches, defined as a list of indexes with a list of bytes

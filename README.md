@@ -10,6 +10,7 @@ There are two ways to run AeroBonkers: command line and website.
   * There are a few flags you can set via the command line. Use `--help` for more information.
 * Website: Run a local webserver with a program such as `serve` and access `index.html`.
   * Note that this website is not suitable for production deployment. See later in this document for information on deploying a website.
+* Also: `npm run ben` runs with Ben Long's default settings
 
 ## Structure
 To learn how to develop your own randomizer with the `randomtools-js` framework, looking at the structure of this example randomizer is the quickest way to understand how to build your own.

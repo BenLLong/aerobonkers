@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "start": "node --experimental-modules index.js",
-    "ben": "node --experimental-modules index.js --no-names aerobiz-original.smc"
+    "ben": "node --experimental-modules index.js --no-names --crazy aerobiz-original.smc"
   },
   "dependencies": {
     "commander": "^2.20.0",

@@ -6,9 +6,10 @@ import { execute } from './randomizer.js';
 
 program 
     .usage('[options] <file>')
-    .option('--no-data', 'Do not randomize plane data')
+    .option('--no-planes', 'Do not randomize plane data')
     .option('--no-names', 'Do not randomize airline names')
-    .option('--no-city', 'Do not randomize city data')
+    .option('--no-cities', 'Do not randomize city data')
+    .option('--crazy', 'Widen the normal distribution of randomization')
     .option('-o, --output <name>', 'Output file name', 'aerobonkers-output.sfc')
     .parse(process.argv);
  
@@ -37,9 +38,9 @@ fs.readFile(program.args[0], (error, fileBuffer) => {
         specs: {
             flags: {
                 a: program.names,
-                p: program.data,
-                c: program.data,
-                crazy: true,
+                p: program.planes,
+                c: program.cities,
+                crazy: program.crazy,
             }
         },
         hooks: {
